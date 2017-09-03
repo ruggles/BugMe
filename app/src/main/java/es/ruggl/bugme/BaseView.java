@@ -5,6 +5,5 @@ package es.ruggl.bugme;
  */
 
 public interface BaseView<T> {
-
     void setPresenter(T BasePresenter);
 }
