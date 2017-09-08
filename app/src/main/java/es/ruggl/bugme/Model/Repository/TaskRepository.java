@@ -13,9 +13,11 @@ public class TaskRepository {
 
     static TaskRepository instance;
 
-    Task[] testTasks;
+    Task[] testTasks = { new Task(1, "Title 1", "Description 1", "05/21/2017", true, false),
+            new Task(2, "Title 2", "Description 2", "05/21/2017", false, true),
+            new Task(3, "Title 3", "Description 3", "05/21/2017", true, true)};
 
-    public TaskRepository getInstance() {
+    public static TaskRepository getInstance() {
         if (instance == null) {
             instance = new TaskRepository();
         }
@@ -24,10 +26,6 @@ public class TaskRepository {
     }
 
     private TaskRepository() {
-        // Will have link to database & helper routines
-        Task[] testTasks = { new Task(1, "Title 1", "Description 1", "05/21/2017", true, false),
-                new Task(2, "Title 2", "Description 2", "05/21/2017", false, true),
-                new Task(3, "Title 3", "Description 3", "05/21/2017", true, true)};
     }
 
     public Task[] getTasks(){

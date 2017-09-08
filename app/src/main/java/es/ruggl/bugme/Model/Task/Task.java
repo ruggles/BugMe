@@ -70,4 +70,8 @@ public class Task {
         return DateFormat.getDateInstance(DateFormat.SHORT).format(createdDate);
     }
 
+    public String getTitle() {
+        return this.title;
+    }
+
 }

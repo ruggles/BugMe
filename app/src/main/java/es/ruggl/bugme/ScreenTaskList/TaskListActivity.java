@@ -15,12 +15,14 @@ import android.widget.ListView;
 
 import java.util.List;
 
+import es.ruggl.bugme.Model.Task.Task;
 import es.ruggl.bugme.R;
 import es.ruggl.bugme.ScreenTaskEdit.TaskEditActivity;
 
-public class TaskListActivity extends AppCompatActivity {
+public class TaskListActivity extends AppCompatActivity implements TaskListContract.View {
 
     private ListView myListView;
+    private TaskListContract.Presenter myPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,22 +43,15 @@ public class TaskListActivity extends AppCompatActivity {
 
         // TODO - FILL IN REAL ADAPTER ONCE WE HAVE A FINISHED MODEL
         myListView = (ListView) findViewById(R.id.Task_List);
-        setDummyAdapter();
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 gotoTaskEdit();
             }
         });
-    }
 
-    private void setDummyAdapter() {
-        String[] dummyArray = {"TASK 1 DUE 01/25/2017 CHECKED",
-                "TASK 2 DUE 05/26/2032 UNCHECKED",
-                "TASK 3 DUE 09/26/2324 CHECKED"};
-        myListView = (ListView) findViewById(R.id.Task_List);
-        myListView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dummyArray));
-
+        // Set Presenter
+        setPresenter(new TaskListPresenter(this));
     }
 
     private void gotoTaskEdit() {
@@ -84,5 +79,30 @@ public class TaskListActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        myPresenter.start();
+        myPresenter.loadTasks();
+    }
+
+    @Override
+    public void setPresenter(TaskListContract.Presenter myPresenter) {
+        this.myPresenter = myPresenter;
+    }
+
+    @Override
+    public void showTasks(Task[] taskArray) {
+
+        String[] dummyArray = new String[taskArray.length];
+
+        for (int i=0; i<taskArray.length; i++) {
+            dummyArray[i] = taskArray[i].getTitle();
+        }
+
+        myListView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dummyArray));
+
     }
 }
