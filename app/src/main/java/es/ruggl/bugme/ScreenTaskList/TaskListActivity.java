@@ -96,13 +96,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskListContr
     @Override
     public void showTasks(Task[] taskArray) {
 
-        String[] dummyArray = new String[taskArray.length];
-
-        for (int i=0; i<taskArray.length; i++) {
-            dummyArray[i] = taskArray[i].getTitle();
-        }
-
-        myListView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dummyArray));
+        myListView.setAdapter(new TaskAdapter(this, taskArray));
 
     }
 }

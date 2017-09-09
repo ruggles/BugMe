@@ -74,4 +74,8 @@ public class Task {
         return this.title;
     }
 
+    public boolean isCompleted() {
+        return this.completed;
+    }
+
 }
