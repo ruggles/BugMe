@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -43,12 +44,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskListContr
 
         // TODO - FILL IN REAL ADAPTER ONCE WE HAVE A FINISHED MODEL
         myListView = (ListView) findViewById(R.id.Task_List);
-        myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                gotoTaskEdit();
-            }
-        });
+
 
         // Set Presenter
         setPresenter(new TaskListPresenter(this));
@@ -57,6 +53,10 @@ public class TaskListActivity extends AppCompatActivity implements TaskListContr
     private void gotoTaskEdit() {
         Intent myIntent = new Intent(this, TaskEditActivity.class);
         startActivity(myIntent);
+    }
+
+    private void completeTask() {
+        Toast.makeText(this, "Completed!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -96,7 +96,23 @@ public class TaskListActivity extends AppCompatActivity implements TaskListContr
     @Override
     public void showTasks(Task[] taskArray) {
 
-        myListView.setAdapter(new TaskAdapter(this, taskArray));
+        // Setup our listeners
+        View.OnClickListener rowListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotoTaskEdit();
+            }
+        };
+
+        // TODO Make this do anything
+        View.OnClickListener CBListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                completeTask();
+            }
+        };
+
+        myListView.setAdapter(new TaskAdapter(this, taskArray, rowListener, CBListener));
 
     }
 }

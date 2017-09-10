@@ -20,12 +20,16 @@ public class TaskAdapter extends BaseAdapter {
     private Task[] taskArray;
     private Context myContext;
     private LayoutInflater myInflater;
+    private View.OnClickListener rowListener;
+    private View.OnClickListener CBListener;
 
 
-    public TaskAdapter(Context myContext, Task[] taskArray) {
+    public TaskAdapter(Context myContext, Task[] taskArray, View.OnClickListener rowListener, View.OnClickListener CBListener) {
         this.myContext = myContext;
         this.myInflater = (LayoutInflater) myContext.getSystemService(myContext.LAYOUT_INFLATER_SERVICE);
         this.taskArray = taskArray;
+        this.rowListener = rowListener;
+        this.CBListener = CBListener;
     }
 
     @Override
@@ -49,6 +53,7 @@ public class TaskAdapter extends BaseAdapter {
     So in order...
     Inflate a new view!
     Update view using information from Task
+    Attach listeners to specific objects
     Return the new view!
 
      */
@@ -65,14 +70,14 @@ public class TaskAdapter extends BaseAdapter {
         titleView.setText(myTask.getTitle());
 
         TextView dueDateView = (TextView) taskView.findViewById(R.id.Task_Item_Due);
-        dueDateView.setText(myTask.getDueDate());
+        dueDateView.setText("Due by: " + myTask.getDueDate() + " ");
 
         CheckBox finishedCB = (CheckBox) taskView.findViewById(R.id.Task_Item_CB);
         finishedCB.setChecked(myTask.isCompleted());
 
-        // TODO INSERT LISTENER INTO WHOLE VIEW TO SEND TO EDITTEXT SCREEN, SENDING TEXT ALSO
-
-        // TODO INSERT LISTENER INTO CHECKBOX TO CHECK OR UNCHECK!
+        // Attach our listeners
+        taskView.setOnClickListener(rowListener);
+        finishedCB.setOnClickListener(CBListener);
 
         return taskView;
     }
