@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import es.ruggl.bugme.DateParser;
+
 /**
  * Created by ruggles on 9/4/17.
  */
@@ -27,7 +29,7 @@ public class Task {
 
     public Task (long id, String title, String description, String dueDateTime, boolean reminder, boolean completed) {
 
-        this.dueDateTime = dateParse(dueDateTime);
+        this.dueDateTime = DateParser.parse(dueDateTime);
 
         this.id = id;
         this.title = title;
@@ -39,35 +41,20 @@ public class Task {
 
     }
 
-    private Date dateParse(String dateString) {
-        try {
-            // First try to parse full format
-            return DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).parse(dateString);
-        } catch (ParseException e) {
-            try {
-                // Then try to parse short format
-                return DateFormat.getDateInstance(DateFormat.SHORT).parse(dateString);
-            } catch (ParseException ex) {
-                throw new IllegalArgumentException("Unable to parse date");
-            }
-
-        }
-    }
-
     public String getDueDate() {
-        return DateFormat.getDateInstance(DateFormat.SHORT).format(dueDateTime);
+        return DateParser.getDate(dueDateTime);
     }
 
     public String getDueTime() {
-        return DateFormat.getTimeInstance(DateFormat.SHORT).format(dueDateTime);
+        return DateParser.getTime(dueDateTime);
     }
 
     public String getDueDateTime() {
-        return DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(dueDateTime);
+        return DateParser.getDateTime(dueDateTime);
     }
 
     public String getCreatedDate() {
-        return DateFormat.getDateInstance(DateFormat.SHORT).format(createdDate);
+        return DateParser.getDate(createdDate);
     }
 
     public String getTitle() {
