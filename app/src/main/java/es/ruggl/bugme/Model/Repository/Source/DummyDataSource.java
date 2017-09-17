@@ -1,38 +1,40 @@
-package es.ruggl.bugme.Model.Repository;
+package es.ruggl.bugme.Model.Repository.Source;
 
 import java.util.Arrays;
-import java.util.Date;
 
+import es.ruggl.bugme.Model.Repository.DataSource;
 import es.ruggl.bugme.Model.Task.Task;
 
 /**
  * Created by ruggles on 9/4/17.
  */
 
-public class TaskRepository {
+public class DummyDataSource implements DataSource {
 
-    static TaskRepository instance;
+    static DummyDataSource instance;
 
     Task[] testTasks = { new Task(1, "Title 1", "Description 1", "05/21/2017", true, false),
             new Task(2, "Title 2", "Description 2", "05/21/2017", false, true),
             new Task(3, "Title 3", "Description 3", "05/21/2017", true, true)};
 
-    public static TaskRepository getInstance() {
+    public static DummyDataSource getInstance() {
         if (instance == null) {
-            instance = new TaskRepository();
+            instance = new DummyDataSource();
         }
 
         return instance;
     }
 
-    private TaskRepository() {
+    private DummyDataSource() {
     }
 
+    @Override
     public Task[] getTasks(){
 
         return testTasks;
     }
 
+    @Override
     public void addTask(Task newTask) {
         //Sends tasks to DB or other repo
 
