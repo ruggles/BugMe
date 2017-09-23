@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import es.ruggl.bugme.Model.Repository.Source.TaskLocalSource;
+import es.ruggl.bugme.Model.Task.Task;
 
 /**
  * Created by ruggles on 9/23/17.
@@ -30,7 +31,6 @@ public class TaskLocalSourceTest {
     @Test
     public void TaskLocalSource_GivenNoTasks_ReturnsEmptyList() {
 
-
     }
 
     @Test
@@ -43,8 +43,30 @@ public class TaskLocalSourceTest {
 
     }
 
-    public void initializeWithTasks() {
+    @Test
+    public void TaskLocalSource_GivenTasks_SuccessfullyReplacesTask() {
 
+    }
+
+    @Test
+    public void TaskLocalSource_GivenDupeAddTask_ThrowsException() {
+
+    }
+
+    @Test
+    public void TaskLocalSource_WhenDeletingNonexistentTask_ThrowsException() {
+
+    }
+
+    @Test
+    public void TaskLocalSource_WhenReplacingNonexistentTask_ThrowsException() {
+
+    }
+
+    public Task[] initializeWithTasks() {
+        Task[] taskArray = new Task[0];
+
+        return taskArray;
     }
 
 }

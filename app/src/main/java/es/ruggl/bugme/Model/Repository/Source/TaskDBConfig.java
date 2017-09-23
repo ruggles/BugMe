@@ -33,7 +33,7 @@ public interface TaskDBConfig {
     String COL_PROPS_COMPLETED = " NONNULL";
 
 
-    String[] COLUMNS =
+    String[] COLUMN_NAMES =
             {COL_NAME_ID,
             COL_NAME_TITLE,
             COL_NAME_DESCRIPTION,
@@ -43,6 +43,7 @@ public interface TaskDBConfig {
             COL_NAME_COMPLETED};
 
     String[][] DB_STRUCTURE = new String[][]{
+            // Has structure: Column name, type, properties, separator
             {COL_NAME_ID, TYPE_NUMBER, COL_PROPS_ID, COMMA},
             {COL_NAME_TITLE, TYPE_TEXT, COL_PROPS_TITLE, COMMA},
             {COL_NAME_DESCRIPTION, TYPE_TEXT, COL_PROPS_DESCRIPTION, COMMA},

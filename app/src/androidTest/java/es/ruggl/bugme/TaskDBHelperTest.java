@@ -58,7 +58,7 @@ public class TaskDBHelperTest implements TaskDBConfig {
         System.out.println("Does TaskDBHelper instantiate?");
         myDB.insert(TABLE_NAME, COL_NAME_DESCRIPTION, myValues);
 
-        Cursor myCursor = myDB.query(TABLE_NAME, COLUMNS, null, null, null, null, null);
+        Cursor myCursor = myDB.query(TABLE_NAME, COLUMN_NAMES, null, null, null, null, null);
 
         myCursor.moveToFirst();
 
