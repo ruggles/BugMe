@@ -6,6 +6,9 @@ package es.ruggl.bugme.Model.Repository.Source;
 
 // TODO THIS SHOULD NOT BE AN INTERFACE, THIS SHOULD BE A CONFIG OBJECT
 public interface TaskDBConfig {
+
+    String DBFILENAME = "task.db";
+
     String TABLE_NAME = " tasks";
     String COL_NAME_ID = " _id";
     String COL_NAME_TITLE = " title";

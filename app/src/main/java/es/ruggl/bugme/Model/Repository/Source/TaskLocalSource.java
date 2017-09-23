@@ -10,13 +10,13 @@ import es.ruggl.bugme.Model.Task.Task;
  * Created by ruggles on 9/16/17.
  */
 
-public class TaskLocalSource implements DataSource {
+public class TaskLocalSource implements DataSource, TaskDBConfig {
 
     private TaskDBHelper myHelper;
     private SQLiteDatabase myDB;
     private static TaskLocalSource instance;
 
-    static TaskLocalSource getInstance(Context appContext) {
+    public static TaskLocalSource getInstance(Context appContext) {
         if (instance == null) {
             instance = new TaskLocalSource(TaskDBHelper.getInstance(appContext));
         }

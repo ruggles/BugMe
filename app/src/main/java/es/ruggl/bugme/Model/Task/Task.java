@@ -18,7 +18,7 @@ public class Task {
     private final boolean reminder;
     private final boolean completed;
 
-    // If not constructed w/ ID, default ID to 0
+    // If not constructed w/ ID, default ID to 0 - these are new tasks
     public Task (String title, String description, String dueDateTime, boolean reminder, boolean completed) {
         this(0, title, description, dueDateTime, reminder, completed);
     }
@@ -35,6 +35,20 @@ public class Task {
         this.completed = completed;
 
 
+    }
+
+    // TODO All these damn getters, this is definitely a smell
+
+    public long getId() {
+        return this.id;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public boolean isReminderSet() {
+        return this.reminder;
     }
 
     public String getDueDate() {
