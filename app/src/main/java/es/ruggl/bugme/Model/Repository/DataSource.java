@@ -8,8 +8,18 @@ import es.ruggl.bugme.Model.Task.Task;
 
 public interface DataSource {
 
-    public Task[] getTasks();
+    interface GetTasksCallback {
+        void onTasksLoaded(Task[] taskArray);
+    }
 
+    public void getTasks(GetTasksCallback callback);
+
+    // We're not going to worry about duplicates, as each task will be assigned an ID by the database
+    // New tasks will have an ID of zero.
     public void addTask(Task newTask);
+
+    public void deleteTask(Task oldTask);
+
+    public void replaceTask(Task oldTask);
 
 }

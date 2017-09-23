@@ -1,7 +1,6 @@
 package es.ruggl.bugme.ScreenTaskList;
 
 import es.ruggl.bugme.Model.Repository.DataSource;
-import es.ruggl.bugme.Model.Repository.Source.DummyDataSource;
 
 /**
  * Created by ruggles on 9/1/17.
@@ -9,17 +8,17 @@ import es.ruggl.bugme.Model.Repository.Source.DummyDataSource;
 
 public class TaskListPresenter implements TaskListContract.Presenter {
 
-    private TaskListContract.View myView;
-    private DataSource myTaskRepository;
+    private TaskListContract.View view;
+    private DataSource dataSource;
 
-    public TaskListPresenter(TaskListContract.View myView) {
-        this.myView = myView;
-        myTaskRepository = DummyDataSource.getInstance();
+    public TaskListPresenter(TaskListContract.View view, DataSource dataSource) {
+        this.view = view;
+        this.dataSource = dataSource;
     }
 
     @Override
     public void loadTasks() {
-        myView.showTasks(myTaskRepository.getTasks());
+        view.showTasks(dataSource.getTasks());
     }
 
     @Override

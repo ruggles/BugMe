@@ -8,14 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by ruggles on 9/14/17.
  */
 
-public class TaskDBHelper extends SQLiteOpenHelper {
+public class TaskDBHelper extends SQLiteOpenHelper implements TaskDBConfig {
 
-    final static String DBFILENAME = "task.db";
-    final static int DBVERSION = 1;
-
-    // Incoming ugly SQL boilerplate
-
-    // Leaving ugly SQL boilerplate
+    public final static String DBFILENAME = "task.db";
+    private final static int DBVERSION = 1;
 
     private static TaskDBHelper instance;
 
@@ -33,6 +29,16 @@ public class TaskDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
+        // Generate Schema based on TaskDBConfig
+        String dbSchema = "CREATE TABLE" + TABLE_NAME + "(";
+        for (String[] field : DB_STRUCTURE) {
+            for (String word: field) {
+                dbSchema = dbSchema.concat(word);
+            }
+        }
+
+        db.execSQL(dbSchema);
 
     }
 

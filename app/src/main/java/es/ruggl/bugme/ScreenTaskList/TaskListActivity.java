@@ -6,16 +6,13 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.List;
-
+import es.ruggl.bugme.Model.Repository.Source.DummyDataSource;
 import es.ruggl.bugme.Model.Task.Task;
 import es.ruggl.bugme.R;
 import es.ruggl.bugme.ScreenTaskEdit.TaskEditActivity;
@@ -42,12 +39,10 @@ public class TaskListActivity extends AppCompatActivity implements TaskListContr
             }
         });
 
-        // TODO - FILL IN REAL ADAPTER ONCE WE HAVE A FINISHED MODEL
         myListView = (ListView) findViewById(R.id.Task_List);
 
-
         // Set Presenter
-        setPresenter(new TaskListPresenter(this));
+        setPresenter(new TaskListPresenter(this, DummyDataSource.getInstance()));
     }
 
     private void gotoTaskEdit() {
