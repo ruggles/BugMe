@@ -29,9 +29,9 @@ public class DummyDataSource implements DataSource {
     }
 
     @Override
-    public Task[] getTasks(){
+    public void getTasks(GetTasksCallback callback){
 
-        return testTasks;
+        callback.onTasksLoaded(testTasks);
     }
 
     @Override
@@ -42,6 +42,15 @@ public class DummyDataSource implements DataSource {
 
         newTestTasks[testTasks.length] = newTask;
         testTasks = newTestTasks;
+    }
+
+    @Override
+    public void deleteTask(Task oldTask) {
+
+    }
+
+    public void replaceTask(Task oldTask) {
+
     }
 
 
