@@ -45,34 +45,57 @@ public class TaskLocalSourceTest {
     public void TaskLocalSource_GivenTasks_ReturnsListOfTasks() {
         Task[] expected = createTaskArray(5);
         initializeWithTasks(expected);
-        populateTasks();
 
+        populateTasks();
         assertArrayEquals(expected, returnedTasks);
     }
 
     @Test
     public void TaskLocalSource_GivenTasks_SuccessfullyDeletesTask() {
-        fail();
+        Task[] given = createTaskArray(5);
+        initializeWithTasks(given);
+
+        Task[] expected = createTaskArray(4);
+        mySource.deleteTask(given[4]);
+
+        populateTasks();
+        assertArrayEquals(expected, returnedTasks);
     }
 
     @Test
     public void TaskLocalSource_GivenTasks_SuccessfullyReplacesTask() {
-        fail();
+        Task[] given = new Task[] {new Task(1, "Title", "Descripto","5/22/2017", false, true)};
+        initializeWithTasks(given);
+
+        Task modified = new Task(1, "differentTitle", "Descripto","5/22/2017", false, true);
+        mySource.replaceTask(modified);
+
+        populateTasks();
+        assertEquals(modified, returnedTasks[0]);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void TaskLocalSource_GivenDupeAddTask_ThrowsException() {
-        fail();
+        Task myTask = new Task(1, "Title", "Blah", "12/12/1222", true, false);
+
+        mySource.addTask(myTask);
+        mySource.addTask(myTask);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void TaskLocalSource_WhenDeletingNonexistentTask_ThrowsException() {
-        fail();
+        initializeWithTasks(createTaskArray(5));
+
+        Task neverAdded = new Task(1, "Title", "Blah", "12/12/1222", true, false);
+        mySource.deleteTask(neverAdded);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void TaskLocalSource_WhenReplacingNonexistentTask_ThrowsException() {
-        fail();
+        initializeWithTasks(createTaskArray(5));
+
+        Task nonExistent = new Task (17, "Title", "Blah", "12/12/1222", true, false);
+        mySource.replaceTask(nonExistent);
     }
 
     public Task[] createTaskArray(int length) {
