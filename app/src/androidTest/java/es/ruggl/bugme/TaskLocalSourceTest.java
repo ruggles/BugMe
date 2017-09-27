@@ -38,13 +38,16 @@ public class TaskLocalSourceTest {
     @Test
     public void TaskLocalSource_GivenNoTasks_ReturnsEmptyArray() {
         populateTasks();
-        assertArrayEquals(returnedTasks, new Task[0]);
+        assertArrayEquals(new Task[0], returnedTasks);
     }
 
     @Test
     public void TaskLocalSource_GivenTasks_ReturnsListOfTasks() {
-        fail();
+        Task[] expected = createTaskArray(5);
+        initializeWithTasks(expected);
+        populateTasks();
 
+        assertArrayEquals(expected, returnedTasks);
     }
 
     @Test
@@ -72,12 +75,20 @@ public class TaskLocalSourceTest {
         fail();
     }
 
-    public Task[] initializeWithTasks() {
-        Task[] taskArray = new Task[0];
+    public Task[] createTaskArray(int length) {
+        Task[] taskArray = new Task[length];
+
+        for (int i=0; i<length; i++)
+            taskArray[i] = new Task(i+1, "Title" + i, "Desc" + i, "10/30/2017", false, false);
 
         return taskArray;
     }
 
+    public void initializeWithTasks(Task[] givenTasks) {
+        for (Task task: givenTasks) {
+            mySource.addTask(task);
+        }
+    }
 
     private void populateTasks() {
 
@@ -85,13 +96,10 @@ public class TaskLocalSourceTest {
             @Override
             public void onTasksLoaded(Task[] taskArray) {
                 returnedTasks = taskArray;
-
             }
         });
 
     }
-
-
 
 
 }

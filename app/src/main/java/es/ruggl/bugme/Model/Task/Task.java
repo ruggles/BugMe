@@ -75,4 +75,33 @@ public class Task {
         return this.completed;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof Task)) {
+            return false;
+        }
+
+        Task otherTask = (Task) other;
+
+        // Run through all the variables
+
+        if ((this.getTitle().equals(otherTask.getTitle()))
+                &&
+                (this.getDescription().equals(otherTask.getDescription()))
+                &&
+                (this.getDueDateTime().equals(otherTask.getDueDateTime()))
+                &&
+                (this.getCreatedDate().equals(otherTask.getCreatedDate()))
+                &&
+                (this.getId()==otherTask.getId())
+                &&
+                (this.isReminderSet()==otherTask.isReminderSet())
+                &&
+                (this.isCompleted()==otherTask.isCompleted())) {
+            return true;
+        }
+
+        return false;
+    }
+
 }
